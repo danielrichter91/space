@@ -3,6 +3,7 @@ import LaunchItem from './LaunchItem';
 
 const launchCount = (launchData) => {
     if (launchData.length === 1) return 'Showing 1 Mission';
+    if (launchData.length === 0) return 'No results, please refine your search';
     return 'Showing ' + launchData.length + ' Missions';
 }
 

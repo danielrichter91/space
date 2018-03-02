@@ -41,7 +41,7 @@ class App extends Component {
 
     // filter launchData by value, lowercased both inputs
     launchDataFilter = ({ value, launchPad, minYear, maxYear }) => {
-        // step 1: filter by keyword
+        // step 1: filter by keywords
         let result = this.state.launchData.filter(launch => {
             const launchInfo = launch.rocket.rocket_name + ' ' + (launch.flight_number).toString() + ' ' + launch.payloads.map(x => x.payload_id + ' ')
             return (launchInfo).toLowerCase().indexOf(value.toLowerCase()) !== -1;
@@ -66,10 +66,7 @@ class App extends Component {
 
     // return an array of unique date values
     uniqueDates = (dates) => {
-        let array = [];
-        dates.map((x,i) => {
-            array.push(moment(x.launch_date_local).format("YYYY"));
-        })
+        const array = dates.map(x => moment(x.launch_date_local).format("YYYY"));
         return array.filter((v, i, a) => a.indexOf(v) === i);
     }
 

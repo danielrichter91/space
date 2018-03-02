@@ -66,6 +66,14 @@ class LaunchSearch extends Component {
         this.setState({formData: formData});
     }
 
+    validateDateRange = ({ minYear, maxYear }) => {
+        // exit if form values empty
+        if (minYear === '' || maxYear === '') return true;
+        // return false if minYear greater than maxYear
+        if (minYear > maxYear) return false;
+        return true;
+    }
+
     render() {
         return (
             <div className='container'>
@@ -98,7 +106,7 @@ class LaunchSearch extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div className='launchsearch__formitem three'>
+                            <div className='launchsearch__formitem three max-year'>
                                 <label htmlFor='max-year'>Max Year</label>
                                 <div className='custom-select'>
                                     <select id='max-year' onChange={this.handleMaxYearChange}>
@@ -114,6 +122,7 @@ class LaunchSearch extends Component {
                             </div>
                         </div>
                     </form>
+                    { this.validateDateRange(this.state.formData) ? undefined : <p className='launchsearch__invaliddate'>Please select a valid date range</p> }
                 </div>
             </div>
         );

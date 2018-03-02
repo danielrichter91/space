@@ -1,3 +1,7 @@
+$media-small: 678px;
+$media-medium: 1000px;
+$media-large: 1280px;
+
 body {
   margin: 0;
   padding: 0;
@@ -14,13 +18,21 @@ p {
   margin: 0 auto;
   padding-left: 58px;
   padding-right: 58px;
-  @media (max-width: 1280px) {
+  @media (max-width: $media-large) {
     padding-left: 40px;
     padding-right: 40px;
   }
+  @media (max-width: $media-small) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
+// Header
 .header {
   padding-top: 35px;
+  @media (max-width: $media-small) {
+    padding-top: 20px;
+  }
 }
 .header__logo {
   color: #FFF;
@@ -29,6 +41,11 @@ p {
   display: block;
 }
 .hero {
+  height: calc(100% - 57px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   img {
     width: 100%;
   }
@@ -36,7 +53,11 @@ p {
 .hero__image {
   background: url('./static/space-photo.jpeg') no-repeat;
   background-size: cover;
+  background-position: center;
   height: 595px;
+  @media (max-width: $media-small) {
+    height: 100vh;
+  }
 }
 .hero__image--fade {
   background: rgba(0,0,0,0.43);
@@ -47,21 +68,48 @@ p {
   color: #FFF;
   text-align: center;
   font-weight: normal;
-  margin-top: 200px;
+  margin: 0 0 100px 0;
+  @media (max-width: $media-small) {
+    font-size: 32px;
+  }
 }
 .content__color {
   background: #eaedf1;
   padding-top: 40px;
+  @media (max-width: $media-small) {
+    padding-top: 20px;
+  }
+}
+.hero__scroll {
+  color: #FFF;
+  display: block;
+  position: absolute;
+  bottom: 50px;
+  left: calc(50% - 25px);
+  margin: 0 auto;
+  padding: 19px 13px;
+  width: 24px;
+  height: 12px;
+  text-indent: -9999px;
+  background: url('./static/down-chevron-white.png') no-repeat;
+  background-position: center;
 }
 
 // LaunchSearch
 .launchsearch {
   background: #f9fafa;
   padding: 20px 30px 25px 30px;
+  @media (max-width: $media-medium) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .launchsearch__wrapper {
   display: flex;
   justify-content: space-between;
+  @media (max-width: $media-small) {
+    flex-wrap: wrap;
+  }
 }
 .launchsearch__formitem {
   padding-left: 30px;
@@ -85,6 +133,9 @@ p {
     &::placeholder {
       color: #a5a5a5;
     }
+    @media (max-width: $media-small) {
+      font-size: 14px;
+    }
   }
   select {
     border-radius: 3px;
@@ -92,15 +143,40 @@ p {
   }
   &.one {
     flex-basis: 20%;
+    @media (max-width: $media-small) {
+      flex-basis: 100%;
+    }
   }
   &.two {
     flex-basis: calc(30% - 30px);
+    @media (max-width: $media-small) {
+      flex-basis: 100%;
+    }
   }
   &.three {
     flex-basis: calc(15% - 30px);
+    @media (max-width: $media-small) {
+      flex-basis: 50%;
+    }
+  }
+  &.max-year {
+    @media (max-width: $media-small) {
+      padding-left: 10px;
+      flex-basis: calc(50% - 10px);
+    }
   }
   &.four {
     flex-basis: calc(10% - 30px);
+    @media (max-width: $media-small) {
+      flex-basis: calc(100% - 30px);
+    }
+  }
+  @media (max-width: $media-medium) {
+    padding-left: 10px;
+  }
+  @media (max-width: $media-small) {
+    padding-left: 0;
+    padding-bottom: 10px;
   }
 }
 .custom-select {
@@ -113,7 +189,7 @@ p {
   background: #fff url('./static/down-chevron.png') no-repeat;
   background-position: top 20px right 15px;
   & select {
-    padding: 5px 8px;
+    padding: 5px 25px 5px 0;
     width: 100%;
     color: #5a6066;
     font-size: 16px;
@@ -127,16 +203,10 @@ p {
     &:focus {
       outline: none;
     }
+    @media (max-width: $media-small) {
+      font-size: 14px;
+    }
   }
-  // &:before {
-  //   content: '';
-  //   position: absolute;
-  //   top: 20px;
-  //   right: 15px;
-  //   width: 17px;
-  //   height: 8px;
-  //   background: url('./static/down-chevron.png');
-  // }
 }
 .launchsearch__inputsubmit {
   background: #1fbba6;
@@ -150,11 +220,23 @@ p {
   align-self: flex-end;
   cursor: pointer;
 }
+.launchsearch__invaliddate {
+  color: #ec5f7a;
+  text-align: right;
+  padding-top: 15px;
+  @media (max-width: $media-small) {
+    text-align: left;
+  }
+}
 
 // LaunchList
 .launchlist__background {
   background: #FFF;
   padding: 30px;
+  min-height: 300px;
+  @media (max-width: $media-small) {
+    padding: 10px;
+  }
 }
 .launchList__count {
   color: #7b8b8e;
@@ -183,16 +265,27 @@ p {
   &.hidden {
     display: none;
   }
+  @media (max-width: $media-small) {
+    flex-wrap: wrap;
+  }
 }
 .launchitem__info {
-  flex-basis: 80%;
+  flex-basis: calc(80% - 40px);
   padding-left: 20px;
   padding-right: 20px;
+  @media (max-width: $media-small) {
+    flex-basis: calc(90% - 20px);
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .launchitem__flightnum {
   flex-basis: 10%;
   text-align: center;
   padding-top: 15px;
+  @media (max-width: $media-small) {
+    flex-basis: 100%;
+  }
 }
 .launchitem__number {
   color: #384047;
@@ -218,6 +311,10 @@ p {
   span {
     color: #ec5f7a;
   }
+  @media (max-width: $media-small) {
+    padding-top: 0;
+    font-size: 16px;
+  }
 }
 .launchitem__subtitle {
   font-size: 14px;
@@ -226,6 +323,9 @@ p {
   margin-bottom: 35px;
   span {
     font-weight: bold;
+  }
+  @media (max-width: $media-small) {
+    margin-bottom: 10px;
   }
 }
 .launchitem__link {
@@ -254,10 +354,20 @@ p {
   align-items: center;
   padding-top: 35px;
   padding-bottom: 35px;
+  @media (max-width: $media-small) {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }
 .footer__copyright {
   color: #a2acae;
+  @media (max-width: $media-small) {
+    font-size: 14px;
+  }
 }
 .footer__backtotop {
   color: #52595e;
+  @media (max-width: $media-small) {
+    font-size: 14px;
+  }
 }

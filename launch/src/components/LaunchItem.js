@@ -1,23 +1,26 @@
 import React from 'react';
+import moment from 'moment';
 
-// Extend this function to allow for multiple payloads
+// Display all payloads from array
 const payloadList = (payloadArray) => {
     return payloadArray.map((x,i) => {
         return x.payload_id + ' ';
     })
 }
-
-// Extend to remove the - when the mission is successful
+// Check mission success
 const missionSuccess = ({ launch_success, land_success }) => {
     if (!launch_success || !land_success) {
-        return <span>Failed Mission</span>;
+        return true;
     }
-    return;
+    return false;
 }
-
-// Extend to covert date to human readable
-const launchDateTime = () => {
-    return;
+// Convert launch date to human readable date
+const launchDate = (date) => {
+    return moment(date).format("Do MMMM YYYY");
+}
+// Convert launch time to human readable time
+const launchTime = (time) => {
+    return moment(time).format("h.ma");
 }
 
 // Open all links in new tab
@@ -27,8 +30,8 @@ const LaunchItem = ({ launchData, display }) => (
             <img src={launchData.links.mission_patch} alt="mission_patch" />
         </div>
         <div className='launchitem__info'>
-            <p className='launchitem__title'>{launchData.rocket.rocket_name} - {payloadList(launchData.payloads)}- {missionSuccess(launchData)}</p>
-            <p className='launchitem__subtitle'>Launched <span>11th October 2017</span> at <span>6.53pm</span> from <span>{launchData.launch_site.site_name}</span></p>
+            <p className='launchitem__title'>{launchData.rocket.rocket_name} - {payloadList(launchData.payloads)}{ missionSuccess(launchData) ? '-' : undefined } { missionSuccess(launchData) ? <span>Failed Mission</span> : undefined }</p>
+            <p className='launchitem__subtitle'>Launched <span>{launchDate(launchData.launch_date_local)}</span> at <span>{launchTime(launchData.launch_date_local)}</span> from <span>{launchData.launch_site.site_name}</span></p>
             { launchData.links.reddit_campaign ? <a href={launchData.links.reddit_campaign} target="_blank" className='launchitem__link'>Reddit Campaign</a> : undefined }
             { launchData.links.reddit_launch ? <a href={launchData.links.reddit_launch} target="_blank" className='launchitem__link'>Reddit Launch</a> : undefined }
             { launchData.links.reddit_recovery ? <a href={launchData.links.reddit_recovery} target="_blank" className='launchitem__link'>Reddit Recovery</a> : undefined }
