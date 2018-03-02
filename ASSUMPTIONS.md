@@ -1,2 +1,2 @@
 # Assumptions
-The user has an internet connection
+The user has an Internet connection

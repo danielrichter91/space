@@ -37,35 +37,41 @@ class LaunchSearch extends Component {
         })
     }
 
+    // keywords input event handler
     handleChange = (event) => {
         let formData = {...this.state.formData};
         formData.value = event.target.value;
         this.setState({formData: formData});
     }
 
+    // event handler for submit button
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.launchDataFilter(this.state.formData)
     }
 
+    // launchpad select event handler
     handleLaunchPadChange = (event) => {
         let formData = {...this.state.formData};
         formData.launchPad = event.target.value;
         this.setState({formData: formData});
     }
 
+    // min year select event handler
     handleMinYearChange = (event) => {
         let formData = {...this.state.formData};
         formData.minYear = event.target.value;
         this.setState({formData: formData});
     }
 
+    // max year select event handler
     handleMaxYearChange = (event) => {
         let formData = {...this.state.formData};
         formData.maxYear = event.target.value;
         this.setState({formData: formData});
     }
 
+    // min and max year select validator
     validateDateRange = ({ minYear, maxYear }) => {
         // exit if form values empty
         if (minYear === '' || maxYear === '') return true;

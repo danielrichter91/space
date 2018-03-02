@@ -1,6 +1,6 @@
 import React from 'react';
 
-// animate scroll to top button
+// animate scroll to content button
 const scrollToContent = (event) => {
     window.scroll({
         top: 595, 
